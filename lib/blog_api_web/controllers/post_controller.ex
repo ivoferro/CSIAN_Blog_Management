@@ -11,7 +11,7 @@ defmodule BlogApiWeb.PostController do
     render(conn, "index.json", posts: posts)
   end
 
-  def create(conn, %{"post" => post_params}) do
+  def create(conn, post_params) do
     with {:ok, %Post{} = post} <- Blogs.create_post(post_params) do
       conn
       |> put_status(:created)
@@ -25,7 +25,7 @@ defmodule BlogApiWeb.PostController do
     render(conn, "show.json", post: post)
   end
 
-  def update(conn, %{"id" => id, "post" => post_params}) do
+  def update(conn, %{"id" => id} = post_params) do
     post = Blogs.get_post!(id)
 
     with {:ok, %Post{} = post} <- Blogs.update_post(post, post_params) do
