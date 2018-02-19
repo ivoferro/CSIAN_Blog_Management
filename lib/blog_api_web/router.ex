@@ -2,6 +2,7 @@ defmodule BlogApiWeb.Router do
   use BlogApiWeb, :router
 
   pipeline :api do
+    plug CORSPlug, [origin: "*"]
     plug :accepts, ["json"]
   end
 
